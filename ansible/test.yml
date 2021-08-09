@@ -1,0 +1,11 @@
+---
+- name: Test
+  hosts: webservers
+  remote_user: ubuntu
+  become: true
+
+  tasks:
+    # - name: Move file from controller to target nodes.
+    #   copy:
+    #     src: /mnt/c/Users/Brian/OneDrive/Documents/GitProjects/WordPressDevops/ansible/testAutomation.txt
+    #     dest: /home/ubuntu/testAutomation.txt
