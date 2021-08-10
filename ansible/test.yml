@@ -5,7 +5,8 @@
   become: true
 
   tasks:
-    # - name: Move file from controller to target nodes.
-    #   copy:
-    #     src: /mnt/c/Users/Brian/OneDrive/Documents/GitProjects/WordPressDevops/ansible/testAutomation.txt
-    #     dest: /home/ubuntu/testAutomation.txt
+    - name: Move file from controller to target nodes.
+      copy:
+        src: /home/ubuntu/WordPressDevops/ansible/testAutomation.txt
+        dest: /home/ubuntu/testAutomation.txt
+        
