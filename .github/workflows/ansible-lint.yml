@@ -3,7 +3,7 @@ name: Deploy Ansible
 on:
   push:
     branches:
-    - master
+    - main
 
 jobs:
   build:
