@@ -1,1 +1,1 @@
-First test.
+Github actions -> ansible playbook successful.
