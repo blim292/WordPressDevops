@@ -1,0 +1,37 @@
+---
+- name: Install Prerequisites for minikube
+  hosts: webservers
+  vars_files:
+    - vars/default.yml
+  remote_user: ubuntu
+  become: true
+  
+  # install kubectl
+  tasks:
+    - name: Update apt and install packages needed to use Kubenetes apt repo.
+      apt:
+        name: "{{ item }}"
+        update_cache: yes
+        state: latest
+      loop: "{{ apt_packages }}"
+
+    - name: Download the Google Cloud public signing key
+      get_url:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        dest: /usr/share/keyrings/kubernetes-archive-keyring.gpg
+        force: yes
+
+    - name: Add the K8s apt repo
+      ansible.builtin.shell: echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+    - name: Install kubectl
+      apt:
+        name: kubectl
+        update_cache: yes
+        state: latest
+
+
+  # install docker
+  # install conntrack
+  # install minikube
+

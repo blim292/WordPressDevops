@@ -6,7 +6,7 @@ variable "ami_id" {
 
 variable "instance_type" {
   type        = string
-  default     = "t2.micro"
+  default     = "t3.micro" # note that t3.micro is required to run minikube on ec2 instance as a hypervisor requires more than one CPU, however it does not fall under the free tier.
   description = "Type of instance to start. In this case, we are using the free for now. Determines the size and class of our instance."
 }
 
@@ -19,5 +19,11 @@ variable "public_key" {
 variable "security_preset" {
   type        = string
   default     = "sg-024999aab64fbb043"
-  description = "preset security group with port 80, and ssh open"
+  description = "Preset security group with port 80, and ssh open"
+}
+
+variable "num_instances" {
+  type        = number
+  default     = 1
+  description = "The number of instances we will create."
 }

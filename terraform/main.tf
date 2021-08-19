@@ -13,6 +13,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "wordpress_ec2" {
+  count                  = var.num_instances
   ami                    = var.ami_id
   instance_type          = var.instance_type
   key_name               = var.public_key
@@ -23,6 +24,6 @@ resource "aws_instance" "wordpress_ec2" {
     volume_size = 30
   }
   tags = {
-    Name = "WordPress Automated Deployment"
+    Name = "WordPress Automated Deployment ${count.index + 1}"
   }
 }
