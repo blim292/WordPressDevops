@@ -6,7 +6,7 @@
   remote_user: ubuntu
   become: true
   
-  # install kubectl
+
   tasks:
     - name: Update apt and install packages needed to use Kubenetes apt repo.
       apt:
@@ -24,14 +24,19 @@
     - name: Add the K8s apt repo
       ansible.builtin.shell: echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
-    - name: Install kubectl
+    - name: Install minikube prereqs (kubectl, docker, conntrack)
       apt:
-        name: kubectl
+        name: "{{ item }}"
         update_cache: yes
         state: latest
+      loop: "{{ minikube_prereqs }}"
 
-
-  # install docker
-  # install conntrack
-  # install minikube
+    - name: Download minikube
+      get_url:
+        url: https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+        dest: /root/minikube_latest_amd64.deb
+    
+    - name: Install minikube
+      apt:
+        deb: /root/minikube_latest_amd64.deb
 

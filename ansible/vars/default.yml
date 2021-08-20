@@ -1,2 +1,3 @@
 # apt packages
 apt_packages: [ 'apt-transport-https', 'ca-certificates' ]
+minikube_prereqs: [ 'kubectl', 'docker', 'conntrack']
