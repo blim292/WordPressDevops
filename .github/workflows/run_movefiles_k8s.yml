@@ -14,8 +14,8 @@ jobs:
       - name: Automated run of ansible-playbook against hosts.
         uses: appleboy/ssh-action@master
         with:
-          host: 108.95.59.33
-          username: ${{ secrests.MAC_USER }}
+          host: ${{ secrets.HOST_IP }}
+          username: ${{ secrets.MAC_USER }}
           password: ${{ secrets.MAC_PASS }}
           port: 22
           script: |
