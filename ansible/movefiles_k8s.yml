@@ -1,0 +1,21 @@
+---
+- name: Test
+  hosts: webservers
+  vars_files:
+    - vars/default.yml
+  remote_user: ubuntu
+  become: true
+
+  tasks:
+    # if doesn't exist, create directory to store k8s files
+    - name: Create directory for k8s files.
+      file:
+        path: /home/ubuntu/k8s_files
+        state: directory
+
+    - name: Move k8s files to master node.
+      copy:
+        src: '/Users/blim292/Documents/WordPressDevops/kubernetes/{{ item }}'
+        dest: '/home/ubuntu/k8s_files/{{ item }}'
+      loop: "{{ kubernetes_files }}"
+

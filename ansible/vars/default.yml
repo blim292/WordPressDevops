@@ -1,3 +1,4 @@
 # apt packages
 apt_packages: [ 'apt-transport-https', 'ca-certificates' ]
-minikube_prereqs: [ 'kubectl', 'docker', 'conntrack']
+minikube_prereqs: [ 'kubectl', 'docker.io', 'conntrack']
+kubernetes_files: [ 'mysql-deployment.yaml', 'secrets.yaml', 'wordpress-deployment.yaml' ]

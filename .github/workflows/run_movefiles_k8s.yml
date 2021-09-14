@@ -1,0 +1,22 @@
+name: Move Required k8s files to hosts.
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: macos-latest
+
+    steps:
+      - name: Automated run of ansible-playbook against hosts.
+        uses: appleboy/ssh-action@master
+        with:
+          host: 108.95.59.33
+          username: ${{ secrests.MAC_USER }}
+          password: ${{ secrets.MAC_PASS }}
+          port: 22
+          script: |
+            ansible-playbook /Users/blim292/Documents/WordPressDevops/ansible/movefiles_k8s.yml
